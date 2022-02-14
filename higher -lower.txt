@@ -1,0 +1,51 @@
+import random
+import game_data
+from replit import clear
+import art
+data=game_data.data
+
+def first():
+  print(art.logo)
+  tries=3
+  score=0
+  while tries>0:
+    eg1=random.choice(data)
+    eg2=random.choice(data)
+    if eg1==eg2:
+      eg2=random.choice(data)
+
+    a,b=user_guess(eg1,eg2)
+    clear()
+    person=main(eg1,eg2)
+    if a['name']==person['name']:
+      score+=1
+    else:
+      tries-=1
+    print(f"you have {tries} tries left and your score is {score} ")
+
+
+  else:
+    print('Game over')
+
+def user_guess(first,second):
+  print("Compare A: ",first['name'],first['description'],first['country'])
+  print(art.vs)
+  print("Compare B: ",second['name'],second['description'],second['country'])
+  user_input=input("Enter the guess: ").lower()
+  if user_input=="a":
+    guess=first
+    not_guess=second
+  else:
+    not_guess=first
+    guess=second
+  return guess,not_guess
+
+def main(one,two):
+  if one['follower_count']>two['follower_count']:
+    ans=one
+  else:
+    ans=two
+  return ans
+first()
+
+
